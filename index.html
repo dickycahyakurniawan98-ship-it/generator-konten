@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Caption Film Sosial Media</title>
+    <!-- Memuat Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for better aesthetics */
+        body {
+            background-color: #f7f9fb;
+            color: #1f2937;
+        }
+        .caption-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+        }
+        .cta-button {
+            transition: all 0.2s;
+        }
+        .cta-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        /* Active state for buttons */
+        .btn-active {
+            background-color: #4f46e5; /* indigo-600 */
+            color: white;
+        }
+        /* Style for multiple selection hint */
+        .select-hint {
+            font-size: 0.875rem;
+            color: #10b981; /* green-500 */
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body class="font-sans min-h-screen flex items-start justify-center p-4 sm:p-8">
+
+    <div class="w-full max-w-4xl bg-white p-6 sm:p-10 rounded-xl caption-card mt-10">
+        
+        <!-- HEADER DENGAN LOGO DICAKUN -->
+        <header class="text-center mb-8 border-b pb-4 border-gray-200">
+            <div class="flex flex-col items-center justify-center">
+                <!-- Placeholder Logo DICAKUN - Menggunakan teks dan styling visual yang kuat -->
+                <div class="inline-flex items-center space-x-2 p-2 bg-indigo-600 rounded-full shadow-lg shadow-indigo-500/50">
+                    <span class="text-3xl font-extrabold text-white tracking-wider">DICAKUN</span>
+                    <svg class="w-7 h-7 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16zM11 15h2v2h-2zm0-8h2v6h-2z"/>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-indigo-700 mt-4 mb-2">
+                Generator  Konten 
+            </h1>
+            <p class="text-gray-500">© 2025 by dcakun. All rights reserved..</p>
+        </header>
+
+        <!-- Area Input Judul Konten -->
+        <div class="mb-8">
+            <label for="movieTitle" class="block text-lg font-semibold text-gray-700 mb-2">Judul Konten:</label>
+            <input type="text" id="movieTitle" placeholder="Contoh: Petualangan Sherina 2 atau Attack on Titan"
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-lg">
+        </div>
+        
+        <!-- Area Pilihan Tipe Konten -->
+        <div class="mb-8">
+            <label class="block text-lg font-semibold text-gray-700 mb-3">Pilih Tipe Konten:</label>
+            <div class="select-hint mb-3 font-medium">Pilih satu atau lebih tipe konten.</div>
+            <div class="flex flex-wrap gap-3">
+                <button data-type="movie" onclick="selectMediaType('movie')" class="btn-type bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-xl cta-button">Movie 🎬</button>
+                <button data-type="anime" onclick="selectMediaType('anime')" class="btn-type bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-xl cta-button">Anime 🌸</button>
+                <button data-type="donghua" onclick="selectMediaType('donghua')" class="btn-type bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-xl cta-button">Donghua 🐉</button>
+            </div>
+            <p id="typeInfo" class="text-sm text-gray-500 mt-2">Tipe aktif: Movie 🎬</p>
+        </div>
+
+
+        <!-- Area Pilihan Genre -->
+        <div class="mb-8">
+            <label class="block text-lg font-semibold text-gray-700 mb-3">Pilih Genre:</label>
+            <div class="select-hint mb-3 font-medium">Pilih satu atau lebih genre (berlaku untuk semua tipe konten).</div>
+            <div class="flex flex-wrap gap-3">
+                <button data-genre="action" onclick="selectGenre('action')" class="btn-genre bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-xl cta-button">Aksi 💥</button>
+                <button data-genre="comedy" onclick="selectGenre('comedy')" class="btn-genre bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-xl cta-button">Komedi 😂</button>
+                <button data-genre="horror" onclick="selectGenre('horror')" class="btn-genre bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-xl cta-button">Horor 👻</button>
+                <button data-genre="romance" onclick="selectGenre('romance')" class="btn-genre bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-xl cta-button">Romantis ❤️</button>
+                <button data-genre="scifi" onclick="selectGenre('scifi')" class="btn-genre bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-xl cta-button">Sci-Fi 👽</button>
+                <button data-genre="other" onclick="selectGenre('other')" class="btn-genre bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-xl cta-button">Lainnya ✨</button>
+            </div>
+            <p id="genreInfo" class="text-sm text-gray-500 mt-2">Genre aktif: Aksi</p>
+        </div>
+
+        <!-- Area Pilihan Hashtag Region -->
+        <div class="mb-8">
+            <label class="block text-lg font-semibold text-gray-700 mb-3">Pilih Wilayah Hashtag:</label>
+            <div class="select-hint mb-3 font-medium">Wilayah akan dicampur (mix) untuk *hashtag* yang dihasilkan.</div>
+            <div class="flex flex-wrap gap-4">
+                <button data-region="indonesia" id="btnIndonesia"
+                        class="btn-region bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl cta-button"
+                        onclick="selectHashtagRegion('indonesia')">
+                    Indonesia 🇮🇩
+                </button>
+                <button data-region="global" id="btnGlobal"
+                        class="btn-region bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-xl cta-button"
+                        onclick="selectHashtagRegion('global')">
+                    Global 🌍
+                </button>
+            </div>
+            <p id="regionInfo" class="text-sm text-gray-500 mt-2">Wilayah aktif: Indonesia 🇮🇩</p>
+        </div>
+
+        <!-- Area Pilihan Jumlah Hashtag -->
+        <div class="mb-8">
+            <label for="hashtagCount" class="block text-lg font-semibold text-gray-700 mb-2">Jumlah Hashtag Target:</label>
+            <input type="number" id="hashtagCount" value="8" min="1" max="30" 
+                   class="w-full sm:w-1/3 p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-lg">
+            <p class="text-sm text-gray-500 mt-2">Disarankan antara 8-15 untuk jangkauan optimal.</p>
+        </div>
+        
+        <!-- Area Input URL Website (BARU) -->
+        <div class="mb-10">
+            <label for="websiteUrl" class="block text-lg font-semibold text-gray-700 mb-2">Link Website/URL Konten:</label>
+            <input type="url" id="websiteUrl" placeholder="Contoh: https://linktr.ee/filmanda atau link nonton resminya"
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-lg">
+            <p class="text-sm text-gray-500 mt-2">Link ini akan otomatis ditambahkan ke caption Twitter/X.</p>
+        </div>
+
+        
+        <!-- Tombol Generate -->
+        <div class="mb-10 pt-4 border-t border-gray-200">
+            <button onclick="generateCaptions()" 
+                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xl py-3 rounded-xl cta-button shadow-lg shadow-indigo-500/50">
+                ✨ Generate Caption Sekarang
+            </button>
+        </div>
+
+
+        <!-- Area Hasil Caption -->
+        <div id="results" class="space-y-8">
+            <!-- Instagram / Facebook Result -->
+            <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-200">
+                <h2 class="text-2xl font-bold text-indigo-700 mb-4 flex items-center">
+                    Instagram & Facebook
+                    <svg class="w-6 h-6 ml-2 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.779 1.674 4.931 4.931.058 1.267.07 1.647.07 4.85 0 3.204-.012 3.584-.07 4.85-6.738 3.252-4.931 4.779-4.931 4.931-.148.058-1.267.07-4.85.07-3.204 0-3.584-.012-4.85-.07-3.252-.148-4.779-1.674-4.931-4.931-.058-1.267-.07-1.647-.07-4.85 0-3.204.012-3.584.07-4.85C2.652 3.837 4.178 2.31 7.435 2.163 8.7 2.105 9.08 2.093 12 2.093zM12 0c-3.259 0-3.666.014-4.945.071C3.39 0.239 0 3.63 0 8.051c0 1.278.014 1.685.071 4.945.148 3.259 3.538 4.787 4.93 4.93.057 1.28.071 1.687.071 4.945 0 3.259-.014 3.666-.071 4.945-.148 3.259-3.538 4.787-4.93 4.93-.057 1.28-.071 1.687-.071 4.945 0-3.259-.014-3.666-.071-4.945-.148 3.259-3.538 4.787-4.93-4.93-.057 1.28-.071 1.687-.071 4.945 0-3.259-.014-3.666-.071-4.945-.148 3.259-3.538 4.787-4.93-4.93-.057 1.28-.071 1.687-.071 4.945 0-3.259.014-3.666.071 4.945zM12 4.419a7.581 7.581 0 100 15.162 7.581 7.581 0 000-15.162zM12 1.44a10.56 10.56 0 110 21.12 10.56 10.56 0 010-21.12zm7.26 3.639c-.752 0-1.365.613-1.365 1.365s.613 1.365 1.365 1.365 1.365-.613 1.365-1.365-.613-1.365-1.365-1.365zM12 7.025c-2.748 0-4.975 2.227-4.975 4.975s2.227 4.975 4.975 4.975 4.975-2.227 4.975-4.975-2.227-4.975-4.975-4.975zM12 8.44a3.56 3.56 0 100 7.12 3.56 3.56 0 000-7.12z"/></svg>
+                </h2>
+                <textarea id="captionIGFB" rows="5" readonly
+                          class="w-full p-4 border border-gray-300 bg-white rounded-lg resize-none text-base text-gray-800 mb-4"
+                          placeholder="Hasil caption untuk Instagram dan Facebook akan muncul di sini..."></textarea>
+                <button onclick="copyToClipboard('captionIGFB', 'copyIGFB')" id="copyIGFB"
+                        class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg cta-button">
+                    Copy Caption
+                </button>
+            </div>
+
+            <!-- Twitter Result -->
+            <div class="bg-blue-50 p-6 rounded-xl border border-blue-200">
+                <h2 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+                    Twitter (X)
+                    <svg class="w-6 h-6 ml-2 text-gray-800" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.216-6.817L4.99 21.75H1.68l7.228-8.26L2.5 2.25h3.376l4.417 5.764L18.244 2.25zm-2.88 18.39l.666.9h-2.14l-4.13-5.385l-4.877 5.385H1.27l7.558-8.63L1.25 2.64h2.14l4.13 5.385L16.2 2.64h3.69l-7.558 8.63 7.558 8.415z"/></svg>
+                </h2>
+                <textarea id="captionTwitter" rows="5" readonly
+                          class="w-full p-4 border border-gray-300 bg-white rounded-lg resize-none text-base text-gray-800 mb-4"
+                          placeholder="Hasil caption untuk Twitter akan muncul di sini..."></textarea>
+                <button onclick="copyToClipboard('captionTwitter', 'copyTwitter')" id="copyTwitter"
+                        class="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg cta-button">
+                    Copy Caption
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA HASHTAG GLOBAL DAN REGIONAL ---
+
+        // Data Hashtag Umum (General)
+        const indonesianHashtags = [
+            "#NontonFilm", "#FilmBaru", "#Bioskop", "#ReviewFilm", "#WajibTonton",
+            "#FilmKeren", "#FilmViral", "#CinephileID", "#MovieOfTheDay"
+        ];
+
+        const globalHashtags = [
+            "#MovieTime", "#FilmFreak", "#NewRelease", "#Cinema", "#MovieLover",
+            "#FilmRecommendation", "#MustWatch", "#BoxOffice", "#MovieReview",
+        ];
+
+        // Data Hashtag Spesifik Genre
+        const genreHashtags = {
+            action: {
+                label: "Aksi 💥",
+                indonesia: ["#Aksi", "#Tegang", "#Laga", "#Adrenalin"],
+                global: ["#ActionMovie", "#Thriller", "#HighOctane", "#Stunts"]
+            },
+            comedy: {
+                label: "Komedi 😂",
+                indonesia: ["#Komedi", "#Ngakak", "#Lucu", "#Hiburan"],
+                global: ["#ComedyMovie", "#Funny", "#Laugh", "#Blockbuster"]
+            },
+            horror: {
+                label: "Horor 👻",
+                indonesia: ["#Horor", "#Seram", "#UjiNyali", "#Mencekam"],
+                global: ["#HorrorMovie", "#Scary", "#JumpScare", "#Creepy"]
+            },
+            romance: {
+                label: "Romantis ❤️",
+                indonesia: ["#Romantis", "#Baper", "#Cinta", "#DramaCinta"],
+                global: ["#RomanceMovie", "#LoveStory", "#DateNight", "#Sweet"]
+            },
+            scifi: { 
+                label: "Sci-Fi 👽",
+                indonesia: ["#FiksiIlmiah", "#MasaDepan", "#Teknologi", "#Alien"],
+                global: ["#SciFi", "#Future", "#Cyberpunk", "#SpaceOpera"]
+            },
+            other: {
+                label: "Lainnya ✨",
+                indonesia: ["#FilmSpesial", "#DocumentaryID", "#IndieID"],
+                global: ["#MustSee", "#IndieFilm", "#FantasyFilm"]
+            }
+        };
+
+        // Data Hashtag Spesifik Tipe Konten
+        const mediaTypeHashtags = {
+            movie: {
+                label: "Movie 🎬",
+                indonesia: ["#FilmIndonesia", "#KaryaAnakBangsa", "#BioskopIndonesia", "#FilmLayarLebar"],
+                global: ["#FeatureFilm", "#Hollywood", "#CinemaLife", "#MovieMagic"]
+            },
+            anime: {
+                label: "Anime 🌸",
+                indonesia: ["#AnimeIndonesia", "#WibuIndonesia", "#KartunJepang", "#OtakuID", "#AnimeManga"],
+                global: ["#Anime", "#Manga", "#Otaku", "#JapanAnime", "#AnimeFan", "#Shonen"]
+            },
+            donghua: {
+                label: "Donghua 🐉",
+                indonesia: ["#DonghuaID", "#SerialChina", "#AnimasiTiongkok", "#WuxiaIndonesia", "#Cultivation"],
+                global: ["#Donghua", "#ChineseAnimation", "#WuxiaDrama", "#Manhua", "#AncientChina"]
+            }
+        };
+
+        // --- STATE APLIKASI ---
+        let selectedGenres = ['action']; 
+        let selectedRegions = ['indonesia']; 
+        let selectedMediaTypes = ['movie']; // Default: Movie
+
+        // --- FUNGSI UTILITY ---
+
+        // Mengambil N hashtag acak dari array
+        function getRandomHashtags(arr, count) {
+            count = Math.min(count, arr.length);
+            
+            const shuffled = arr.slice();
+            let i = arr.length;
+            while (i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled.slice(0, count);
+        }
+
+        // Fungsi Toggle untuk Genre/Tipe/Region
+        function toggleSelection(key, selectionArray, dataMap, btnClass, infoId, dataKey) {
+            const btn = document.querySelector(`.${btnClass}[${dataKey}="${key}"]`);
+            const index = selectionArray.indexOf(key);
+            
+            if (index > -1) {
+                // Hapus
+                if (selectionArray.length > 1) {
+                    selectionArray.splice(index, 1); 
+                    btn.classList.remove('btn-active', 'bg-indigo-500', 'hover:bg-indigo-600', 'text-white');
+                    btn.classList.add('bg-gray-300', 'hover:bg-gray-400', 'text-gray-800');
+                } else {
+                    return; // Mencegah penghapusan item terakhir
+                }
+            } else {
+                // Tambah
+                selectionArray.push(key);
+                btn.classList.add('btn-active', 'bg-indigo-500', 'hover:bg-indigo-600', 'text-white');
+                btn.classList.remove('bg-gray-300', 'hover:bg-gray-400', 'text-gray-800');
+            }
+
+            // Update info text
+            let labels;
+            if (dataKey === 'data-region') {
+                labels = selectionArray.map(r => r === 'indonesia' ? 'Indonesia 🇮🇩' : 'Global 🌍').join(' & ');
+            } else {
+                labels = selectionArray.map(k => dataMap[k].label.split(' ')[0]).join(', ');
+            }
+            
+            document.getElementById(infoId).textContent = `${infoId === 'regionInfo' ? 'Wilayah' : (infoId === 'genreInfo' ? 'Genre' : 'Tipe')} aktif (${selectionArray.length}): ${labels}`;
+        }
+
+        // Pembungkus fungsi toggle
+        function selectGenre(genre) {
+            toggleSelection(genre, selectedGenres, genreHashtags, 'btn-genre', 'genreInfo', 'data-genre');
+        }
+
+        function selectHashtagRegion(region) {
+            toggleSelection(region, selectedRegions, null, 'btn-region', 'regionInfo', 'data-region');
+        }
+
+        function selectMediaType(type) {
+             toggleSelection(type, selectedMediaTypes, mediaTypeHashtags, 'btn-type', 'typeInfo', 'data-type');
+        }
+
+        // --- FUNGSI UTAMA GENERASI CAPTION ---
+        
+        function generateCaptions() {
+            const titleInput = document.getElementById('movieTitle');
+            const title = titleInput.value.trim();
+
+            const captionIGFB = document.getElementById('captionIGFB');
+            const captionTwitter = document.getElementById('captionTwitter');
+            const hashtagCountInput = document.getElementById('hashtagCount');
+            
+            // Dapatkan URL Website
+            const websiteUrl = document.getElementById('websiteUrl').value.trim();
+
+            // 1. Validasi Judul & Jumlah Hashtag
+            if (!title) {
+                captionIGFB.value = "Silakan isi Judul Konten terlebih dahulu.";
+                captionTwitter.value = "Silakan isi Judul Konten terlebih dahulu.";
+                return;
+            }
+
+            let desiredCount = parseInt(hashtagCountInput.value, 10);
+            if (isNaN(desiredCount) || desiredCount < 1) {
+                desiredCount = 8;
+                hashtagCountInput.value = 8;
+            } else if (desiredCount > 30) {
+                desiredCount = 30;
+                hashtagCountInput.value = 30;
+            }
+
+
+            // 2. Kumpulkan SEMUA Hashtag yang mungkin ke dalam satu Set unik
+            let allPossibleHashtags = new Set();
+
+            // Hashtag Judul
+            const cleanedTitle = title.replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '');
+            const titleHashtag = '#' + cleanedTitle;
+            allPossibleHashtags.add(titleHashtag);
+            
+            // Logika penggabungan Region (Indonesia & Global)
+            selectedRegions.forEach(regionKey => {
+                // A. Hashtag Umum
+                const generalList = (regionKey === 'indonesia') ? indonesianHashtags : globalHashtags;
+                generalList.forEach(tag => allPossibleHashtags.add(tag));
+                
+                // B. Hashtag Spesifik Genre
+                selectedGenres.forEach(genreKey => {
+                    if (genreHashtags[genreKey] && genreHashtags[genreKey][regionKey]) {
+                        genreHashtags[genreKey][regionKey].forEach(tag => allPossibleHashtags.add(tag));
+                    }
+                });
+
+                // C. Hashtag Spesifik Tipe Konten
+                selectedMediaTypes.forEach(typeKey => {
+                    if (mediaTypeHashtags[typeKey] && mediaTypeHashtags[typeKey][regionKey]) {
+                        mediaTypeHashtags[typeKey][regionKey].forEach(tag => allPossibleHashtags.add(tag));
+                    }
+                });
+            });
+
+            // 3. Konversi ke Array, Acak, dan Batasi jumlahnya
+            const poolArray = Array.from(allPossibleHashtags).filter(tag => tag !== titleHashtag); // Hapus judul dari pool acak
+            
+            // Alokasikan minimal 1 untuk hashtag judul, sisanya untuk hashtag dari pool
+            const numTagsFromPool = desiredCount - 1; 
+
+            let selectedHashtags = getRandomHashtags(poolArray, numTagsFromPool);
+            
+            // Tambahkan kembali hashtag judul di awal (atau pastikan ada)
+            if (!selectedHashtags.includes(titleHashtag)) {
+                selectedHashtags.unshift(titleHashtag);
+            }
+
+            // Batasi kembali jika penambahan judul melebihi batas (walaupun jarang)
+            if (selectedHashtags.length > desiredCount) {
+                selectedHashtags = selectedHashtags.slice(0, desiredCount);
+            }
+            
+            // Acak ulang urutan final (optional, agar judul tidak selalu di depan)
+            selectedHashtags = getRandomHashtags(selectedHashtags, selectedHashtags.length);
+
+            const finalHashtagString = selectedHashtags.join(' '); 
+
+            // 4. Tampilkan Caption
+            
+            // Instagram / Facebook Caption (Tetap gunakan CTA "link in bio")
+            const igfbCaption = `${title}
+Full movie in bio🎥
+            
+${finalHashtagString}`;
+            
+            captionIGFB.value = igfbCaption;
+
+            // --- LOGIKA CAPTION TWITTER ---
+            let twitterCaptionContent = `${title}
+Full movie🎥👇`; // CTA default harus selalu ada
+            
+            if (websiteUrl) {
+                // Tambahkan URL di baris baru di bawah CTA
+                twitterCaptionContent += `
+${websiteUrl}`;
+            } 
+            
+            const twitterCaption = `${twitterCaptionContent}
+            
+${finalHashtagString}`;
+
+            captionTwitter.value = twitterCaption;
+            // --- AKHIR LOGIKA CAPTION TWITTER ---
+        }
+
+        // Fungsi untuk menyalin ke clipboard
+        function copyToClipboard(elementId, buttonId) {
+            const element = document.getElementById(elementId);
+            const button = document.getElementById(buttonId);
+
+            try {
+                element.select();
+                element.setSelectionRange(0, 99999); 
+                document.execCommand('copy');
+                button.textContent = 'Tersalin!';
+                setTimeout(() => {
+                    button.textContent = 'Copy Caption';
+                }, 1500);
+            } catch (err) {
+                console.error('Gagal menyalin:', err);
+                button.textContent = 'Gagal Copy';
+            }
+        }
+
+        // --- INISIALISASI ---
+        window.onload = function() {
+            // Helper untuk inisialisasi visual
+            const initVisuals = (arr, btnClass, dataKey, dataMap, infoId, isRegion = false) => {
+                arr.forEach(key => {
+                    const btn = document.querySelector(`.${btnClass}[${dataKey}="${key}"]`);
+                    if (btn) {
+                        btn.classList.add('btn-active', 'bg-indigo-500', 'hover:bg-indigo-600', 'text-white');
+                        btn.classList.remove('bg-gray-300', 'hover:bg-gray-400', 'text-gray-800');
+                    }
+                });
+
+                let labels;
+                if (isRegion) {
+                    labels = arr.map(r => r === 'indonesia' ? 'Indonesia 🇮🇩' : 'Global 🌍').join(' & ');
+                } else {
+                    labels = arr.map(k => dataMap[k].label.split(' ')[0]).join(', ');
+                }
+                
+                document.getElementById(infoId).textContent = `${infoId === 'regionInfo' ? 'Wilayah' : (infoId === 'genreInfo' ? 'Genre' : 'Tipe')} aktif (${arr.length}): ${labels}`;
+            };
+            
+            // Inisialisasi visual (warna tombol dan info) tetap berjalan
+            initVisuals(selectedMediaTypes, 'btn-type', 'data-type', mediaTypeHashtags, 'typeInfo');
+            initVisuals(selectedGenres, 'btn-genre', 'data-genre', genreHashtags, 'genreInfo');
+            initVisuals(selectedRegions, 'btn-region', 'data-region', null, 'regionInfo', true);
+        };
+    </script>
+
+</body>
+</html>
